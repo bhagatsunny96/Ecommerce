@@ -1,0 +1,59 @@
+{% extends 'adminpages/adminbase.html'%}
+{% block title %} All Users {% endblock %}
+{% block content %}
+<style type ="text/css">
+    .use .table{
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ffffff;
+    }
+    .use .table thead tr th{
+        border-top: 0px;
+        font-size: 16px;
+        font-weight: bold;
+        border-bottom: 0px;
+    }
+    .use .table tbody tr td{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        vertical-align: middle;
+        align-self: center;
+    }
+    .use .table tbody tr td h6{
+        font-size: 16px;
+        color: black;
+        margin-bottom: 0px;
+    }
+</style>
+<section class ="mt-5">
+    <div class="container">
+        <h3 style="text-align: center; color: #e7709e;">All Users</h3>
+        <hr>
+        <div class="use">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="text-white">SN</th>
+                            <th scope="col" class="text-white">Username</th>
+                            <th scope="col" class="text-white">Name</th>
+                            <th scope="col" class="text-white">Address</th>
+                            <th scope="col" class="text-white">joined On</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for u in allusers %}
+                        <tr>
+                            <td><h6>{{forloop.counter}}</h6></td>
+                            <td><h6>{{u.user}}</h6></td>
+                            <td><h6>{{u.full_name}}</h6></td>
+                            <td><h6>{{u.address}}</h6></td>
+                            <td><h6>{{u.joined_on}}</h6></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Stripe Sucees {% endblock %}
+{% block content %}
+	<div id="box">
+		<h4>Thank you for your Purchase of Rs {{amq}}!</h4>
+		<p></p>
+		<hr>
+		<div>
+			<a href="{% url 'ecom:home' %}">
+				<buton class="btn btn-success p-2">Go To Home Page</buton>
+			</a>
+		</div>
+	</div>
+
+{% endblock content %}

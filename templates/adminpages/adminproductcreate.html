@@ -1,0 +1,36 @@
+{% extends 'adminpages/adminbase.html' %}
+
+{% block title %}Add New Product{% endblock %}
+
+{% block content %}
+<style type="text/css">
+    body,
+    html{
+        background: lightgray !important;
+    }
+    .cnt{
+        background: #fff;
+    }
+</style>
+<br>
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="cnt justify-content-center">
+            <div class="col-md-12 mx-auto">
+                <br>
+                <h3 style="color: lightcoral; text-align: center;">Add New product</h3>
+                <br>
+                <div class="form_containter">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form.as_p}}
+                        <div class="d-flex justify-content-center mt-3">
+                            <button class="btn btn-dark">Create Product</button>
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

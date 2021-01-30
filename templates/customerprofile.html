@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<style type ="text/css">
+#hero{
+    display:table;
+    width: 100vw;
+    height: 60vh;
+    background: url(/media/profilecover/coverpic.png) top center;
+    background-size: cover;
+}
+@media (min-width: 1024px){
+    #hero{
+        background-attachment: fixed;
+    }
+}
+
+#hero .hero-logo{
+    margin: 20px;
+    max-width: 100%;
+}
+#hero .hero-container{
+    background: rgba(0,0,0,0.2);
+    display: table-cell;
+    margin: 0;
+    padding:0;
+    text-align: center;
+    vertical-align: middle;
+}
+#hero h1{
+    margin: 30px 0 10px 0;
+    font-weight: bold;
+    line-height: 48px;
+    text-transform: uppercase;
+    color: #fff;
+}
+@media (max-width: 768px){
+    #hero h1{
+        font-size: 28px;
+        line-height: 36px;
+    }
+}
+#hero h2{
+    color: #fff;
+    margin-bottom: 50px;
+    font-style: italic;
+}
+@media (max-width: 768px){
+    #hero h2{
+        font-size: 24px;
+        line-height: 26px;
+        margin-bottom: 30px;
+    }
+    
+}
+#hero .actions a{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 2px;
+    transition: 0.5s;
+    margin: 10px;
+}
+#hero .btn-get-started{
+    background: #ebe703;
+    border: 2px solid #a85303;
+    color: #fff;
+}
+#hero .btn-get-started:hover{
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+    text-decoration: none;
+    font-style: italic;
+}
+     .cart .table{
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ffffff;
+    }
+    .cart .table thead tr th{
+        border-top: 0px;
+        font-size: 16px;
+        font-weight: bold;
+        border-bottom: 0px;
+    }
+    .cart .table tbody tr td{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        vertical-align: middle;
+        align-self: center;
+    }    
+    .cart .table tbody tr td h6{
+        font-size: 16px;
+        color: black;
+        margin-bottom: 0px;
+    }
+    .nal{
+        color: #e79702;
+        font-size: medium;
+        font-weight: bold;
+    }
+</style>
+<section id="hero">
+    <div class="hero-container">
+        <div class="hero-logo">
+            <h1 class="font-weight-bold">{{customer.full_name}}</h1>
+        </div>
+        </div>
+</section>
+<section class = "mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="font-weight-bolder">Detail Information</h3><hr>
+                <div class="row my-2">
+                    <span class="font-weight-bolder">Name:</span>
+                    &nbsp;
+                        <div class="nal">
+                            {{customer.full_name}}
+                        </div>
+                </div>
+                <div class="row my-2">
+                    <span class="font-weight-bolder">Username:</span>
+                    &nbsp;
+                        <div class="nal">
+                            {{customer.user.username}}
+                        </div>
+                </div>
+                <div class="row my-2">
+                    <span class="font-weight-bolder">Email:</span>
+                    &nbsp;
+                            <div class="nal">
+                                {{customer.user.email}}
+                            </div>
+                </div>
+                <div class="row my-2">
+                    <span class="font-weight-bolder">Address:</span>
+                    &nbsp;
+                        <div class="nal">
+                            {{customer.address}}
+                        </div>
+                </div>
+                <div class="row my-2">
+                    <span class="font-weight-bolder">Joined on:</span>
+                    &nbsp;
+                        <div class="nal">
+                            {{customer.joined_on}}
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h3 class="font-weight-bolder">Previous Orders</h3>
+                <hr>
+                <div class="cart">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col" class="text-white">SN</th>
+                                    <th scope="col" class="text-white">Order ID</th>
+                                    <th scope="col" class="text-white">Amount</th>
+                                    <th scope="col" class="text-white">Ordered On</th>
+                                    <th scope="col" class="text-white">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ord in orders %}
+                                <tr>
+                                    <td><h6>{{forloop.counter}}</h6></td>
+                                    <td><a href="{% url 'ecom:customerorderdetail' ord.pk %}"> #ORDER_{{ord.id}}</a></td>
+                                    <td><h6>{{ord.total}}</h6></td>
+                                    <td><h6>{{ord.created_at|timesince}} ago</h6></td>
+                                    <td><h6>{{ord.order_status}}</h6></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

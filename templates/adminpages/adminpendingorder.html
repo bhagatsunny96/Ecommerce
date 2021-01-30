@@ -1,0 +1,61 @@
+{% extends "adminpages/adminbase.html" %}
+
+{% block title %}Admin Pending Orders{% endblock %}
+
+{% block content %}
+<style type ="text/css">
+    .pending .table{
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ffffff;
+    }
+    .pending .table thead tr th{
+        border-top: 0px;
+        font-size: 16px;
+        font-weight: bold;
+        border-bottom: 0px;
+    }
+    .pending .table tbody tr td{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        vertical-align: middle;
+        align-self: center;
+    }
+    .pending .table tbody tr td h6{
+        font-size: 16px;
+        color: black;
+        margin-bottom: 0px;
+    }
+</style>
+<section class ="mt-5">
+    <div class="container">
+        <h3 style="text-align: center; color: #e7709e;">Pending Orders</h3>
+        <hr>
+        <div class="pending">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="text-white">SN</th>
+                            <th scope="col" class="text-white">Order ID</th>
+                            <th scope="col" class="text-white">Customer</th>
+                            <th scope="col" class="text-white">Ordered On</th>
+                            <th scope="col" class="text-white">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in pendingorders %}
+                        <tr>
+                            <td><h6>{{forloop.counter}}</h6></td>
+                            <td><h6><a href="{% url 'ecom:adminorderdetail' order.id %}">#ORDER_{{order.id}}</a></h6></td>
+                            <td><h6>{{order.ordered_by}}</h6></td>
+                            <td><h6>{{order.created_at}}</h6></td>
+                            <td><h6>{{order.total}}</h6></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

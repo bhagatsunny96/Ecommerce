@@ -1,0 +1,66 @@
+{% extends 'adminpages/adminbase.html' %}
+{% block title %}All Products{% endblock %}
+
+
+{% block content %}
+<style type ="text/css">
+    .prod .table{
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ffffff;
+    }
+    .prod .table thead tr th{
+        border-top: 0px;
+        font-size: 16px;
+        font-weight: bold;
+        border-bottom: 0px;
+    }
+    .prod .table tbody tr td{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        vertical-align: middle;
+        align-self: center;
+    }
+    .prod .table tbody tr td h6{
+        font-size: 16px;
+        color: black;
+        margin-bottom: 0px;
+    }
+</style>
+<section class ="mt-5">
+    <div class="container">
+        <div>
+            <a href="{% url 'ecom:adminproductcreate' %}">
+                <button type="button" class="btn btn-dark">Add New Product</button>
+            </a>
+        </div>
+        <h3 style="text-align: center; color: #e7709e;">All Products</h3>
+        <hr>
+        <div class="prod">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col" class="text-white">SN</th>
+                            <th scope="col" class="text-white">Product Title</th>
+                            <th scope="col" class="text-white">Image</th>
+                            <th scope="col" class="text-white">Price</th>
+                            <th scope="col" class="text-white">Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in allproducts %}
+                        <tr>
+                            <td><h6>{{forloop.counter}}</h6></td>
+                            <td><h6>{{p.title}}</h6></td>
+                            <td><h6><img src="{{p.image.url}}" style="height: 60px;" alt=""></h6></td>
+                            <td><h6>{{p.selling_price}}</h6></td>
+                            <td><h6>{{p.view_count}}</h6></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
